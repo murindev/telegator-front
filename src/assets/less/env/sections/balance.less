@@ -1,0 +1,136 @@
+@import "../smart-grid";
+@import "../variables";
+
+.balance {
+  margin-top: @margin-main;
+
+  > div > div {
+    align-items: flex-start;
+  }
+
+  &-menu {
+    .col();
+    .size(2);
+    .box-shadow;
+
+    a {
+      display: block;
+      background-size: 12px;
+      font-size: 12px;
+      color: @color-text;
+      margin-bottom: 10px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      svg {
+        margin-right: 5px;
+        width: 12px;
+      }
+
+      &.active, &:hover {
+        color: @color-link;
+        text-decoration: none;
+      }
+
+    }
+  }
+
+  &-page {
+    .col();
+    .size(10);
+    .box-shadow;
+    &-row {
+      margin-top: 16px;
+    }
+    &-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 256px;
+      .formkit-outer {
+        margin-top: 12px;
+        width: 100%;
+        margin-bottom: 0;
+      }
+      a {
+        display: inline-flex;
+        margin-top: 20px;
+        margin-bottom: 16px;
+        .middle;
+        svg {
+          margin-right: 5px;
+        }
+      }
+      h3 {
+        margin: 20px 0 6px;
+      }
+
+    }
+  }
+
+  &-sections {
+    .col();
+    .size(10);
+    margin-bottom: @margin-main;
+  }
+
+  &-filter {
+    padding: @padding-main;
+    background: @color-background;
+    .box-shadow-main;
+    flex-direction: column;
+    &-header {
+      display: flex;
+      align-items: center;
+      h4 {
+        line-height: 0;
+      }
+      .i-plus {
+        padding-left: 12px;
+        background-size: 10px;
+        margin-left: 16px;
+        margin-top: 2px;
+      }
+    }
+    &-row {
+      margin-top: 12px;
+     fieldset {
+       .col();
+       .size(3);
+       display: flex;
+       .formkit-outer {
+         width: 100%;
+         margin-top: 0;
+         margin-bottom: 0;
+       }
+
+       .minus {
+         display: inline-block;
+         width: 24px;
+         height: 10px;
+         background: url("../../../img/icons/minus.png") no-repeat center center;
+         background-size: 6px auto;
+         align-self: center;
+       }
+
+       legend {
+         position: absolute;
+         top: 0;
+         left: 0;
+         font-size: 12px;
+       }
+     }
+      button {
+        margin-left: auto;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  table {
+    margin-top: @margin-main;
+  }
+
+
+}

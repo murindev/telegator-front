@@ -1,0 +1,46 @@
+{
+  "name": "tgator-front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service build --watch --mode development",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@formkit/vue": "^1.0.0-beta.8",
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "@j-t-mcc/vue3-chartjs": "^1.3.0",
+    "axios": "^0.27.2",
+    "chart.js": "^3.7.1",
+    "click-outside-vue3": "^4.0.1",
+    "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
+    "tiny-emitter": "^2.1.0",
+    "vue": "^3.0.0",
+    "vue-class-component": "^8.0.0-0",
+    "vue-property-decorator": "^9.1.2",
+    "vue-router": "^4.0.0-0",
+    "vue3-perfect-scrollbar": "^1.6.0",
+    "vuejs-confirm-dialog": "^0.4.1",
+    "vuex": "^4.0.0-0",
+    "vuex-class": "^0.3.2",
+    "vuex-module-decorators": "^2.0.0",
+    "vuex-persistedstate": "^4.1.0",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.17",
+    "@vue/cli-plugin-router": "~4.5.17",
+    "@vue/cli-plugin-typescript": "~4.5.17",
+    "@vue/cli-plugin-vuex": "~4.5.17",
+    "@vue/cli-service": "~4.5.17",
+    "@vue/compiler-sfc": "^3.0.0",
+    "less": "^3.0.4",
+    "less-loader": "^5.0.0",
+    "typescript": "~4.1.5"
+  },
+  "types": "file:src/types/config.d.ts"
+}

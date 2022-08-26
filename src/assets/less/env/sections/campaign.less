@@ -1,0 +1,106 @@
+@import "../smart-grid";
+@import "../variables";
+
+.campaign {
+  &-new {
+    .col();
+    .size(12);
+    .box-vertical;
+
+  }
+
+  &-filter {
+    .filter-block;
+    &-header {
+      min-height: 16px;
+    }
+  }
+
+  .table {
+    margin-top: @margin-main;
+  }
+
+  &-add {
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    .formkit-outer {
+      margin-bottom: 16px;
+    }
+
+    &-form {
+      .col();
+      .size(8);
+      .box-shadow-thin;
+      margin-top: @margin-main;
+      //height: 212px;
+      //max-height: 212px;
+    }
+
+    .inner-row {
+
+      .formkit-outer {
+        .col();
+        .size(6);
+      }
+    }
+
+    &-description {
+      .col();
+      .size(4);
+      .box-shadow-thin;
+      margin-top: @margin-main;
+      height: 212px;
+      max-height: 212px;
+      .textarea-wpr {
+        height: calc(100% - 57px);
+      }
+    }
+
+    &-sbt {
+      .col();
+      .size(12);
+      .box-vertical;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  &-attr {
+    .col();
+    .size(8);
+    .box-shadow;
+    margin-top: @margin-main;
+    &-date {
+      .date-view {
+        .col();
+        .size(3);
+        margin-top: 12px;
+        span {
+          font-size: 10px;
+          color: @color-light;
+        }
+        p {
+          color: @color-text;
+        }
+      }
+    }
+  }
+
+  &-content {
+    .col();
+    .size(4);
+    .box-shadow;
+    margin-top: @margin-main;
+    &-text {
+      margin-top: 12px;
+    }
+  }
+
+
+}

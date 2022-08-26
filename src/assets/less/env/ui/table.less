@@ -1,0 +1,240 @@
+@import "../smart-grid";
+.table {
+  .col();
+  .size(12);
+}
+
+td,th {
+  &:first-of-type {
+    padding-left: 12px;
+    padding-right: 6px;
+  }
+  &:last-of-type {
+    padding-right: 12px;
+    padding-left: 6px;
+  }
+}
+
+th {
+  .th-col {
+    text-align: left;
+    align-items: flex-start;
+    span.center {
+      text-align: left;
+      margin: 0;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  thead {
+    background: @color-thead-bg;
+    height: 32px;
+    box-sizing: border-box;
+    tr {
+      th {
+        vertical-align: center;
+        box-sizing: border-box;
+        padding: 0 6px;
+        color: @color-thead-text;
+        font-size: 12px;
+        .sort {
+          color: inherit;
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+          user-select: none;
+
+          &:before {
+            content: '';
+            width: 10px;
+            height: 6px;
+            position: absolute;
+            display: block;
+            top: 50%;
+            left: -16px;
+            margin-top: -3px;
+            background: url("../../../img/icons/arr-down.png") no-repeat center;
+          }
+          &.asc {
+            &:before {
+              background: url("../../../img/icons/arr-top-active.png") no-repeat center;
+            }
+          }
+          &.desc {
+            &:before {
+              background: url("../../../img/icons/arr-top-active.png") no-repeat center;
+              transform: rotate(180deg);
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  tfoot {
+    background: @color-td-bg;
+    &.small {
+      th {
+        height: 34px;
+        span {
+          padding-right: 16px;
+          font-size: 12px;
+        }
+      }
+
+    }
+    tr {
+      th {
+
+
+
+      }
+    }
+  }
+
+  tbody {
+    background: @color-td-bg;
+    tr {
+      td {
+        height: 45px;
+        border-bottom: 1px solid @color-tbody-border;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 0 6px;
+      }
+    }
+  }
+}
+
+.th {
+  &-col {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    label.chb {
+      width: 16px;
+      height: 16px;
+      box-sizing: border-box;
+      border: 1px solid @color-border;
+      border-radius: 2px;
+      display: inline-block;
+      background: @color-background;
+      &.empty {
+        border: 1px solid transparent;
+      }
+
+    }
+
+    input[type="checkbox"]:checked + label.chb {
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        background: url("../../../img/icons/tick.png") no-repeat center;
+      }
+    }
+
+
+  }
+}
+.td {
+  &-col {
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    label.chb {
+      width: 16px;
+      height: 16px;
+      box-sizing: border-box;
+      border: 1px solid @color-border;
+      border-radius: 2px;
+      display: inline-block;
+      background: @color-background;
+      &.empty {
+        border: 1px solid transparent;
+      }
+
+    }
+
+    input[type="checkbox"]:checked + label.chb {
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        background: url("../../../img/icons/tick.png") no-repeat center;
+      }
+    }
+
+  }
+  &-channel {
+    span {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    a {
+      font-weight: 600;
+      font-size: 14px;
+      color: @color-text;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .avatar {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 50%;
+      margin-right: 12px;
+      overflow: hidden;
+      background: @color-text;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 19px;
+  ul {
+    .col();
+    .size(12);
+    background: @color-pagination-bg;
+    li {
+      display: inline-flex;
+      height: 26px;
+      box-sizing: border-box;
+      margin-right: 3px;
+      &.active {
+        border-bottom: 1px solid @color-link;
+        button {
+          color: @color-link;
+        }
+      }
+      &.dots {
+        margin: 0 4px;
+      }
+
+      button {
+        justify-content: center;
+        padding: 0 10px;
+        font-size: 11px;
+        color: @color-pagination-text;
+        background: unset;
+      }
+    }
+  }
+}

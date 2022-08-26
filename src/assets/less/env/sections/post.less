@@ -1,0 +1,32 @@
+@import "../smart-grid";
+@import "../variables";
+.post {
+  margin-top: @margin-main;
+  &-stat {
+    .col();
+    .size(8);
+    .box-shadow;
+    &-graph {
+      margin-top: 65px;
+    }
+    &-data {
+      margin-top: 16px;
+      p {
+        .col();
+        .size(4);
+        margin-bottom: 11px;
+        span {
+          display: block;
+          font-size: 10px;
+        }
+      }
+
+    }
+  }
+  &-content {
+    .col();
+    .size(4);
+    .box-shadow;
+  }
+
+}
