@@ -2,7 +2,7 @@
 
   <x-section>
     <div class="add-channel">
-      <button class="sbt i-circle-plus mr-auto" @click="$router.push({name:'TaskNew'})">Создать задание</button>
+<!--      <button class="sbt i-circle-plus mr-auto" @click="$router.push({name:'TaskNew'})">Создать задание</button>-->
       <button class="blank i-coffee">Мои каналы</button>
       <span>Вы админ канала?</span>
       <button class="a icon">

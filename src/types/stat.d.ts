@@ -146,6 +146,7 @@ export interface ITgstatPost {
     channel?: ITgstatCommonInfos
     channel_stat?: ITgstatStat
     views_by_hours?:ITgstatPostsViewsByHours[]
+    tgstat_post_stat?: ITgstatPostStat
 }
 
 export interface ITgstatPostStat {

@@ -33,10 +33,10 @@
         <div v-if="channel?.is_public"><em>Зарегистрирован</em></div>
       </div>
       <div class="channel-media">
-        <p><span>Фотопост</span><span class="red">789 890</span></p>
-        <p><span>Видеопост</span><span class="red">789 890</span></p>
-        <p><span>Фото</span><span class="red">789 890</span></p>
-        <p><span>Опрос</span><span class="red">789 890</span></p>
+<!--        <p><span>Фотопост</span><span class="red">789 890</span></p>-->
+<!--        <p><span>Видеопост</span><span class="red">789 890</span></p>-->
+<!--        <p><span>Фото</span><span class="red">789 890</span></p>-->
+<!--        <p><span>Опрос</span><span class="red">789 890</span></p>-->
       </div>
     </div>
   </x-section>

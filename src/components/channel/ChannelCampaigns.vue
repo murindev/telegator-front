@@ -11,7 +11,11 @@
         <tr v-for="taskChannel in taskChannels.data" :key="taskChannel.campaign_id"> <!--taskChannels.data-->
           <td/>
 
-          <td-text><router-link :to="{name:'Task', params:{id:taskChannel.task_id}}">{{taskChannel?.task.title}}</router-link></td-text>
+          <td-text>
+
+            <router-link v-if="UserModule.role == 'advert'" :to="{name:'Task', params:{id:taskChannel.id}}">{{taskChannel?.task.title}}</router-link>
+            <router-link v-else :to="{name:'Task', params:{id:taskChannel.id}}">{{taskChannel?.task.title}}</router-link>
+          </td-text>
           <td-text v-text="taskChannel?.price"/>
           <td-text v-text="taskChannel.paid"/>
           <td-text v-text="$helper.dateTime(taskChannel.task.range_start_at)"/>
@@ -56,8 +60,10 @@ const {fieldsSet} = taskChannelModel(['campaign_title', 'task_price', 'paid', 'r
 
 fieldsSet.value.channel_id.value = Number(router.currentRoute.value.params.id)
 fieldsSet.value.channel_id.show = false
+if(UserModule.role == 'advert') {
+  fieldsSet.value.user_id.value = UserModule.user.id
+}
 
-// fieldsSet.value.user_id.value = UserModule.user.id
 fieldsSet.value.user_id.show = false
 
 const {

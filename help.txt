@@ -1,0 +1,85 @@
+1/ Установка стандвртная
+==============================================
+Перенос движка Ларавел на поддомен api.****.ru
+----------------------------------------------
+conf NGINX BACK (**** заменить на имя домена)
+----------------------------------------------
+server {
+	#listen 80 default_server;
+	#listen [::]:80 default_server;
+
+	root /var/www/****.ru/public;
+
+	# Add index.php to the list if you are using PHP
+	index index.php;
+
+	server_name www.api.****.ru api.****.ru;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+	}
+
+    location /api/ {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+	location ~ \.php$ {
+    fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include /etc/nginx/fastcgi_params;
+    }
+}
+Фронт на домен ****.ru. Собранные файлы после билда из /dist в папку public laravel
+----------------------------------------------
+conf NGINX FRONT (**** заменить на имя домена)
+----------------------------------------------
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/****.ru/public;
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name www.****.ru ****.ru;
+    error_page  404 /index.html;
+
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+
+}
+----------------------------------------------
+
+
+2/ Константы
+==============================================
+TG_BOT_TOKEN=5344600531:AAFyxRbXaYYachsT4c1k5k_lY8RGRvzkGas
+
+#Путь к Python скрипту
+PARSER_PATH=/var/www/ParsingForTelegator_2/
+
+# Процент прибыли платформы
+FEE_PERCENT=15
+
+# Штраф за несоблюдение тишины
+POST_SILENCE_BROKEN_PENALTY=10
+
+# Штраф за несоблюдение длительности размещения
+POST_SCHEDULE_BROKEN_PENALTY=100
+
+
+3/ запись в кронтаб
+==============================================
+* * * * * root cd /var/www/jsgu.ru && php artisan schedule:run >> /dev/null 2>&1
+
+Python скриптом управляет  /app/Console/Kernel.php
+
+protected function schedule(Schedule $schedule) {
+        $schedule->command('channel:cron')->hourly(); // мониторит кампании
+        $schedule->command('channels:cron')->daily(); // мониторит общее состояние каналов
+}
+
+
+4/ Имитация банка) в таблице user поле balance

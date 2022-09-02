@@ -45,7 +45,7 @@
         </div>
 
         <div class="channel-stat-item">
-          <span>Стоимость поста, руб.</span> <b v-text="prices()"/>
+          <span>Стоимость поста, руб.</span> <b v-html="prices()"/>
 
         </div>
 
@@ -146,7 +146,7 @@ const prices = () => {
     let max = channel.value?.prices.reduce((prev, current) => (prev.price > current.price) ? prev : current)
 
     if (min.price === max.price) {
-      return max
+      return max.price.toLocaleString()
     } else {
       return `${min.price.toLocaleString()}~${max.price.toLocaleString()} `
     }

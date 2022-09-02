@@ -23,10 +23,14 @@ type THelper = {
     dateTime
     ruBool
     fromPercent
+    toPercent
     toInt
     date
     dateDotted
     time
+    fromTimestamp
+    timeDiffHours
+    timeDiffHoursNow
 }
 
 type TScheme = {

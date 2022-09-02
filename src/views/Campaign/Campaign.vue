@@ -81,6 +81,8 @@ const destroyConfirm = () => {
   )
 }
 
+
+
 const campaignChangePermit = ref(false)
 
 const destroyCampaign = () => CampaignModule.destroyCampaign({id})

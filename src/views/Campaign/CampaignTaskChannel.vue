@@ -6,33 +6,82 @@
 
         <p><span>Название</span>{{ taskChannel?.task?.title }}</p>
         <p><span>Какому каналу выдано</span>
-          <router-link :to="{name:'ChannelStats', param: {id: taskChannel?.channel_id}}">
+<!--          <router-link :to="{name:'ChannelStats', param: {id: taskChannel?.channel_id}}">
             {{ taskChannel?.channel.title }}
-          </router-link>
+          </router-link>-->
+          <a :href="`/dashboard/channels/${taskChannel?.channel_id}/stats`">{{ taskChannel?.channel.title }}</a>
         </p>
         <p><span>Тип поста</span>{{ postType() }}</p>
-        <p><span>Начало публикации</span>{{ $helper.dateTime(taskChannel?.task?.range_start_at) }}</p>
-        <p><span>Конец публикации</span>{{ $helper.dateTime(taskChannel?.task?.range_end_at) }}</p>
+<!--        <p><span>Начало публикации</span>{{ $helper.dateTime(taskChannel?.task?.range_start_at) }}</p>-->
+<!--        <p><span>Конец публикации</span>{{ $helper.dateTime(taskChannel?.task?.range_end_at) }}</p>-->
 
-        <p><span>Длительность размещения</span>{{ taskChannel?.task?.duration }}</p>
+        <template v-if="taskChannel?.tgstat_post">
+          <p><span>Начало публикации</span>
+            {{ $helper.dateTime(taskChannel.tgstat_post.date*1000) }}
+          </p>
+          <p><span>Конец публикации</span>
+            <template v-if="taskChannel.tgstat_post.is_deleted !== '0'">
+              {{ $helper.dateTime(taskChannel.tgstat_post.deleted_at*1000) }}
+            </template>
+            <template v-else>
+              Пост не удален
+            </template>
+          </p>
+        </template>
+
+        <template v-else>
+          <p><span>Предполагаемое начало публикации</span>
+            {{ $helper.dateTime(taskChannel?.task?.range_start_at) }}
+          </p>
+          <p><span>Предполагаемый конец публикации</span>{{ $helper.dateTime(taskChannel?.task?.range_end_at) }}</p>
+        </template>
+
+<!--        <p><span>Длительность размещения</span>{{ taskChannel?.task?.duration }}</p>-->
+
+
+        <template v-if="taskChannel?.tgstat_post && taskChannel?.tgstat_post.deleted_at">
+          <p><span>Итоговая длительность размещения</span>{{ $helper.timeDiffHours(taskChannel?.tgstat_post.date, taskChannel?.tgstat_post.deleted_at) }}</p>
+        </template>
+        <template v-else-if="taskChannel?.tgstat_post">
+          <p><span>Текущая длительность размещения</span>{{ $helper.timeDiffHoursNow(taskChannel.tgstat_post.date) }}</p>
+        </template>
+        <template v-else>
+          <p><span>Предполагаемая длительность размещения</span>
+            <template v-if="[1,4].includes(taskChannel?.price_type)">
+              24 часа
+            </template>
+            <template v-else-if="[2,5].includes(taskChannel?.price_type)">
+              48 часов
+            </template>
+            <template v-else-if="[3].includes(taskChannel?.price_type)">
+              Постоянная
+            </template>
+            <template v-else>
+              По договорённости
+            </template>
+          </p>
+        </template>
+
+
         <p><span>Продолжительность тишины</span>{{ taskChannel?.task?.silence }} часа</p>
 
-        <p><span>Предполагаемое вознаграждение</span> {{ taskChannel?.price }}</p>
-        <p><span>Одобрение рекламодателем</span>{{ taskChannel?.status.title }}</p>
+        <p><span>Предполагаемое вознаграждение</span>{{ $price.format(priceFact()) }}</p>
+        <p><span>Статус задания</span>{{ taskChannel?.status.title }}</p>
         <p><span>Минимальное время нахождения поста в ленте</span>{{ priceType() }}</p>
-        <p class="red"><span>Фактическое вознаграждение</span>888</p>
+<!--        <p class="red"><span>Фактическое вознаграждение</span>888 9999</p>-->
 
 
         <p><span>Контактная информация</span>{{ taskChannel?.channel.contact }}</p>
 
-        <p class="red"><span>Фактическое время тишины в ленте после публикации</span>888</p>
+<!--        <p class="red"><span>Фактическое время тишины в ленте после публикации</span>888</p>-->
         <p><span>Штраф в ходе кампании</span>{{ taskChannel?.penalty ?? 'нет' }}</p>
         <p><span>Был заблокирован</span>{{ $helper.ruBool(taskChannel?.channel.is_deleted) }}</p>
 
       </x-inner-row>
 
-      <div class="task-attr-sbt" v-show="taskChannel?.state === 1 && taskChannel?.channel.owner_id === UserModule.user.id ">
-<!--   && taskChannel?.task.user_id === UserModule.user     -->
+      <div class="task-attr-sbt"
+           v-show="taskChannel?.state === 1 && taskChannel?.channel.owner_id === UserModule.user.id ">
+        <!--   && taskChannel?.task.user_id === UserModule.user     -->
         <button class="sbt" @click="refuse()">Отклонить</button>
         <button class="dark" @click="confirm()">Принять</button>
       </div>
@@ -84,6 +133,10 @@ import UserModule from "@/store/modules/user";
 
 const taskChannel: Ref<TTaskChannel> = ref(null)
 
+const priceFact = () => {
+
+  return UserModule.role == 'channel' ? (100 - Number(UserModule.user.fee)) / 100 * Number(taskChannel.value?.price) : taskChannel.value?.price
+}
 
 const postType = () => {
   let type = []
